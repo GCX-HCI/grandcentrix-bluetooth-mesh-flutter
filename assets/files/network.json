@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://www.bluetooth.com/specifications/specs/mesh-cdb-1-0-1-schema.json#",
+  "version": "1.0.1",
+  "meshUUID": "2B7E546F-C76D-405B-A3AE-44DA90FE496B",
+  "meshName": "Viega Test Mesh Network",
+  "timestamp": "2024-09-05T15:36:03+02:00",
+  "partial": false,
+  "netKeys": [
+    {
+      "name": "My Viega Network Key",
+      "index": 0,
+      "key": "45F47064FA7A5D9948E8CD782FD1EDDF",
+      "phase": 0,
+      "minSecurity": "secure",
+      "timestamp": "2024-09-05T15:34:41+02:00"
+    }
+  ],
+  "appKeys": [
+    {
+      "name": "My Viega Application Key",
+      "index": 0,
+      "boundNetKey": 0,
+      "key": "714F134C3EA5D4C761A40A423D3DCD29"
+    }
+  ],
+  "provisioners": [
+    {
+      "provisionerName": "nRF Mesh Provisioner",
+      "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
+      "allocatedUnicastRange": [
+        {
+          "lowAddress": "0001",
+          "highAddress": "199A"
+        }
+      ],
+      "allocatedGroupRange": [
+        {
+          "lowAddress": "C000",
+          "highAddress": "CC9A"
+        }
+      ],
+      "allocatedSceneRange": [
+        {
+          "firstScene": "0001",
+          "lastScene": "3333"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
+      "name": "nRF Mesh Provisioner",
+      "deviceKey": "B5B8C5DDB9FE103FAE6DF450AAF161A4",
+      "unicastAddress": "0001",
+      "security": "insecure",
+      "configComplete": false,
+      "features": {
+        "friend": 2,
+        "lowPower": 2,
+        "proxy": 2,
+        "relay": 2
+      },
+      "defaultTTL": 5,
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [],
+      "elements": [
+        {
+          "name": "Element: 0x0001",
+          "index": 0,
+          "location": "0000",
+          "models": [
+            {
+              "modelId": "0001",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "2BEC02FD-A9B2-4BB9-9413-FD02564DC446",
+      "name": "Canoble",
+      "deviceKey": "2E0F457AC60BE19730DD8B969DD80DEA",
+      "unicastAddress": "0002",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0002",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    }
+  ],
+  "groups": [],
+  "scenes": [],
+  "networkExclusions": []
+}
