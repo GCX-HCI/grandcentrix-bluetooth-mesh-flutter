@@ -9,6 +9,7 @@ allprojects {
     }
 }
 
+// This whole section is just there to fix the mesh library and its outdated gradle configuration
 subprojects {
     tasks.withType(JavaCompile) {
         sourceCompatibility = '1.8'
