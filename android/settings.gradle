@@ -23,3 +23,5 @@ plugins {
 }
 
 include ":app"
+include ':mesh'
+project(':mesh').projectDir = file('/Users/thomassiebenmorgen/.pub-cache/hosted/pub.dev/nordic_nrf_mesh-0.13.0/Android-nRF-Mesh-Library-1/mesh/')
