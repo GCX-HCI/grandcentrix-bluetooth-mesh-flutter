@@ -1,4 +1,4 @@
-package net.grandcentrix.bluetooth.mesh.nrf.mesh
+package net.grandcentrix.bluetooth.mesh.nrf.demo
 
 import io.flutter.embedding.android.FlutterActivity
 
