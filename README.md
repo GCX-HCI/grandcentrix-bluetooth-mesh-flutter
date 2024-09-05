@@ -1,2 +1,3 @@
-# grandcentrix-bluetooth-mesh-flutter
-nRF Bluetooth Mesh demo for Flutter
+# grandcentrix Bluetooth Mesh Flutter
+
+nRF Bluetooth Mesh demo
