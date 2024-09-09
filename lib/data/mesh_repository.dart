@@ -31,7 +31,7 @@ class MeshRepository {
     final device =
         await _nordicNrfMesh.searchForSpecificNode(node.id, isProxy: true);
     if (device != null) {
-      _bleMeshManager.callbacks = _Callbacks();
+      _bleMeshManager.callbacks = _Callbacks(_bleMeshManager);
       await _bleMeshManager.connect(device);
     } else {
       // TODO
@@ -48,9 +48,13 @@ class MeshRepository {
 }
 
 class _Callbacks extends BleMeshManagerCallbacks {
+  final BleMeshManager _bleMeshManager;
+
+  _Callbacks(BleMeshManager bleMeshManager) : _bleMeshManager = bleMeshManager;
+
   @override
   Future<void> sendMtuToMeshManagerApi(int mtu) async {
-    // TODO: implement sendMtuToMeshManagerApi
+    _bleMeshManager.mtuSize = mtu;
   }
 }
 
