@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SearchState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
+  Set<Node> get nodes => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,7 @@ abstract class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
-  $Res call({bool isLoading, bool hasError});
+  $Res call({bool isLoading, bool hasError, Set<Node> nodes});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   $Res call({
     Object? isLoading = null,
     Object? hasError = null,
+    Object? nodes = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -62,6 +64,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      nodes: null == nodes
+          ? _value.nodes
+          : nodes // ignore: cast_nullable_to_non_nullable
+              as Set<Node>,
     ) as $Val);
   }
 }
@@ -74,7 +80,7 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool hasError});
+  $Res call({bool isLoading, bool hasError, Set<Node> nodes});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? hasError = null,
+    Object? nodes = null,
   }) {
     return _then(_$SearchStateImpl(
       isLoading: null == isLoading
@@ -102,6 +109,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
+      nodes: null == nodes
+          ? _value._nodes
+          : nodes // ignore: cast_nullable_to_non_nullable
+              as Set<Node>,
     ));
   }
 }
@@ -109,7 +120,11 @@ class __$$SearchStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SearchStateImpl implements _SearchState {
-  const _$SearchStateImpl({this.isLoading = false, this.hasError = false});
+  const _$SearchStateImpl(
+      {this.isLoading = false,
+      this.hasError = false,
+      final Set<Node> nodes = const <Node>{}})
+      : _nodes = nodes;
 
   @override
   @JsonKey()
@@ -117,10 +132,18 @@ class _$SearchStateImpl implements _SearchState {
   @override
   @JsonKey()
   final bool hasError;
+  final Set<Node> _nodes;
+  @override
+  @JsonKey()
+  Set<Node> get nodes {
+    if (_nodes is EqualUnmodifiableSetView) return _nodes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_nodes);
+  }
 
   @override
   String toString() {
-    return 'SearchState(isLoading: $isLoading, hasError: $hasError)';
+    return 'SearchState(isLoading: $isLoading, hasError: $hasError, nodes: $nodes)';
   }
 
   @override
@@ -131,11 +154,13 @@ class _$SearchStateImpl implements _SearchState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.hasError, hasError) ||
-                other.hasError == hasError));
+                other.hasError == hasError) &&
+            const DeepCollectionEquality().equals(other._nodes, _nodes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, hasError);
+  int get hashCode => Object.hash(runtimeType, isLoading, hasError,
+      const DeepCollectionEquality().hash(_nodes));
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -147,13 +172,17 @@ class _$SearchStateImpl implements _SearchState {
 }
 
 abstract class _SearchState implements SearchState {
-  const factory _SearchState({final bool isLoading, final bool hasError}) =
-      _$SearchStateImpl;
+  const factory _SearchState(
+      {final bool isLoading,
+      final bool hasError,
+      final Set<Node> nodes}) = _$SearchStateImpl;
 
   @override
   bool get isLoading;
   @override
   bool get hasError;
+  @override
+  Set<Node> get nodes;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
