@@ -1,0 +1,22 @@
+# Config file for ./flutterw pub run build_runner build
+
+targets:
+  $default:
+    builders:
+      # Tell json_serializable to always use the toJson method into its generated code
+      # Otherwise it probably converts a wrong JSON string
+      json_serializable:
+        options:
+          explicit_to_json: true
+      # Tell freezed to put all generated classes into lib/.generated
+      # instead of putting it next to the source class
+      freezed|freezed:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/.generated/{{}}.freezed.dart'
+      # Tell source_gen to put all generated classes into lib/.generated
+      # instead of putting it next to the source class
+      source_gen|combining_builder:
+        options:
+          build_extensions:
+            '^lib/{{}}.dart': 'lib/.generated/{{}}.g.dart'
