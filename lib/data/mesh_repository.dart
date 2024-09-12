@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mesh/models/node.dart';
@@ -42,8 +44,39 @@ class MeshRepository {
     await _bleMeshManager.disconnect();
   }
 
-  Future<void> sendMessage(List<int> message) async {
-    _bleMeshManager.sendPdu(message);
+  Future<void> sendVendorModelMessage(
+      {required int address,
+      required int modelId,
+      required int companyIdentifier,
+      required String opCode,
+      required String parameters}) async {
+    final nodes = await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes;
+    final node = nodes?.last;
+    final elements = await node?.elements;
+    final element = elements!.last;
+    final model = element.models.last;
+    modelId = model.modelId;
+    address = element.address;
+    companyIdentifier = modelId.toInt16();
+    _nordicNrfMesh.meshManagerApi.sendVendorModelMessage(
+      address,
+      modelId,
+      companyIdentifier,
+      opCode,
+      parameters,
+      keyIndex: model.boundAppKey.first,
+    );
+  }
+}
+
+extension Int16 on int {
+  int toInt16() {
+    final bytes = Uint8List(4)
+      ..buffer.asByteData().setInt32(0, this, Endian.big);
+    final buffer = bytes.buffer;
+    final byteData = ByteData.view(buffer);
+    int short = byteData.getInt16(0, Endian.big);
+    return short;
   }
 }
 

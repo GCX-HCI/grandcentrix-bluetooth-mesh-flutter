@@ -48,7 +48,18 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   void changeColor(String id) async {
-    await _meshRepository.sendMessage([]);
+    const address = 0;
+    const int modelId = 0;
+    const int companyIdentifier = 0;
+    const String opCode = '04';
+    const String parameters = '0C22001201';
+    await _meshRepository.sendVendorModelMessage(
+      address: address,
+      modelId: modelId,
+      companyIdentifier: companyIdentifier,
+      opCode: opCode,
+      parameters: parameters,
+    );
   }
 
   Node _findNodeById(String id) =>
