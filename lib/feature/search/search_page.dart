@@ -78,6 +78,11 @@ class SearchPage extends StatelessWidget {
                                         viewModel.changeColor(node),
                                     child: const Text('Change Color'),
                                   ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        viewModel.triggerMotor(node),
+                                    child: const Text('Trigger Motor'),
+                                  ),
                                 ],
                               ),
                             );

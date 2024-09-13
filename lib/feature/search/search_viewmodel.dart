@@ -7,8 +7,15 @@ import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 
 part '../../.generated/feature/search/search_viewmodel.freezed.dart';
 
-const String _viegaOpCode = '04'; // Defined CAN bus message
-const String _viegaParameters = '0C22001201'; // Defined CAN bus message
+// Defined CAN bus message OP code to change the LED color
+const String _viegaChangeColorOpCode = '04';
+// Defined CAN bus message parameters to change the LED color
+const String _viegaChangeColorParameters = '0C22001201';
+
+// Defined CAN bus message OP code to trigger the motor
+const String _viegaTriggerMotorOpCode = '04';
+// Defined CAN bus message parameters to trigger the motor
+const String _viegaTriggerMotorParameters = '0125001301';
 
 @freezed
 class SearchState with _$SearchState {
@@ -93,8 +100,22 @@ class SearchViewModel extends ViewModel<SearchState> {
     final result = await _meshRepository.sendVendorModelMessage(
       address: element.address,
       modelId: vendorModel.modelId,
-      opCode: _viegaOpCode,
-      parameters: _viegaParameters,
+      opCode: _viegaChangeColorOpCode,
+      parameters: _viegaChangeColorParameters,
+      keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
+    );
+    print(result);
+  }
+
+  void triggerMotor(MeshNode node) async {
+    final element = await node.node.firstElementWithVendorModel;
+    final vendorModel = element.firstVendorModel;
+
+    final result = await _meshRepository.sendVendorModelMessage(
+      address: element.address,
+      modelId: vendorModel.modelId,
+      opCode: _viegaTriggerMotorOpCode,
+      parameters: _viegaTriggerMotorParameters,
       keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
     );
     print(result);
