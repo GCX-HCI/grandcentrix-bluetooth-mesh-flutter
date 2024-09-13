@@ -3,8 +3,12 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
+import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 
 part '../../.generated/feature/search/search_viewmodel.freezed.dart';
+
+const String vendorModelOpCode = '04'; // Defined CAN bus message
+const String vendorModelParameters = '0C22001201'; // Defined CAN bus message
 
 @freezed
 class SearchState with _$SearchState {
@@ -61,19 +65,18 @@ class SearchViewModel extends ViewModel<SearchState> {
 
   void changeColor(MeshNode node) async {
     final elements = await node.node.elements;
-    final element = elements.last;
-    final model = element.models.last;
-    final modelId = model.modelId;
-    final address = element.address;
-    const String opCode = '04';
-    const String parameters = '0C22001201';
+    final element = elements.first;
+    final vendorModel =
+        element.models.firstWhere((model) => model.isVendorModel);
 
     final result = await _meshRepository.sendVendorModelMessage(
-      address: address,
-      modelId: modelId,
-      opCode: opCode,
-      parameters: parameters,
-      keyIndex: model.boundAppKey.first,
+      address: element.address,
+      modelId: vendorModel.modelId,
+      opCode: vendorModelOpCode,
+      parameters: vendorModelParameters,
+      keyIndex: vendorModel.boundAppKey.isNotEmpty
+          ? vendorModel.boundAppKey.first
+          : 0,
     );
     print(result);
   }
@@ -83,4 +86,8 @@ class SearchViewModel extends ViewModel<SearchState> {
     _subscription?.cancel();
     return super.close();
   }
+}
+
+extension VendorModelCheck on ModelData {
+  bool get isVendorModel => (modelId & 0xFFFF0000) != 0;
 }
