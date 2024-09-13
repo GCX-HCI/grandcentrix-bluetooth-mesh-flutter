@@ -88,7 +88,7 @@ extension _VendorModelSearch on ProvisionedMeshNode {
   Future<ElementData> get firstElementWithVendorModel async {
     final elements = await this.elements;
     return elements.firstWhere(
-      (element) => element.models.any((model) => model.isVendorModel),
+      (element) => element.hasVendorModel,
       orElse: () => elements.first,
     );
   }
@@ -99,6 +99,8 @@ extension _VendorModelGetter on ElementData {
         (model) => model.isVendorModel,
         orElse: () => models.first,
       );
+
+  bool get hasVendorModel => models.any((model) => model.isVendorModel);
 }
 
 extension _VendorModelCheck on ModelData {
