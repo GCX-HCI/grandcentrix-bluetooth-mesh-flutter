@@ -34,28 +34,23 @@ class SearchPage extends StatelessWidget {
                       : ListView.builder(
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            final node = state.proxyNodes.elementAt(index);
+                            final proxyNode = state.proxyNodes.elementAt(index);
                             return Card(
                               child: Column(
                                 children: [
                                   Text(
-                                    '${node.name} (${node.id})',
+                                    '${proxyNode.name} (${proxyNode.uuid})',
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
                                   TextButton(
-                                    onPressed: () => viewModel.connect(node.id),
+                                    onPressed: () =>
+                                        viewModel.connect(proxyNode),
                                     child: const Text('Connect'),
                                   ),
                                   TextButton(
-                                    onPressed: () =>
-                                        viewModel.disconnect(node.id),
+                                    onPressed: () => viewModel.disconnect(),
                                     child: const Text('Disconnect'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        viewModel.changeColor(node.id),
-                                    child: const Text('Change Color'),
                                   ),
                                 ],
                               ),
@@ -63,6 +58,28 @@ class SearchPage extends StatelessWidget {
                           },
                           itemCount: state.proxyNodes.length,
                         ),
+                  const SizedBox(height: 24),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final node = state.meshNodes.elementAt(index);
+                      return Card(
+                        child: Column(
+                          children: [
+                            Text(
+                              '${node.name} \n (${node.uuid})',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            TextButton(
+                              onPressed: () => viewModel.changeColor(node),
+                              child: const Text('Change Color'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: state.meshNodes.length,
+                  ),
                 ],
               ),
             ),

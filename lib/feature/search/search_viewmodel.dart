@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
@@ -12,13 +11,14 @@ class SearchState with _$SearchState {
   const factory SearchState({
     @Default(false) bool isLoading,
     @Default(false) bool hasError,
-    @Default(<DiscoveredDevice>{}) Set<DiscoveredDevice> proxyNodes,
+    @Default(<Device>[]) List<Device> proxyNodes,
+    @Default(<MeshNode>[]) List<MeshNode> meshNodes,
   }) = _SearchState;
 }
 
 class SearchViewModel extends ViewModel<SearchState> {
   final MeshRepository _meshRepository;
-  StreamSubscription<DiscoveredDevice>? _subscription;
+  StreamSubscription<Device>? _subscription;
 
   SearchViewModel({required MeshRepository meshRepository})
       : _meshRepository = meshRepository,
@@ -31,26 +31,36 @@ class SearchViewModel extends ViewModel<SearchState> {
 
   void findProxyNodes() async {
     emit(state.copyWith(isLoading: true));
-    _subscription = _meshRepository.findProxyNodes().listen((proxyNode) {
-      emit(state.copyWith(isLoading: false, proxyNodes: {
-        ...state.proxyNodes,
-        ...{proxyNode}
-      }));
+    _subscription = _meshRepository
+        .findProxyNodes()
+        .where((proxyNode) =>
+            state.proxyNodes.every((element) => element.uuid != proxyNode.uuid))
+        .listen((proxyNode) {
+      emit(state.copyWith(
+        isLoading: false,
+        proxyNodes: [
+          ...state.proxyNodes,
+          ...{proxyNode}
+        ],
+      ));
     });
   }
 
-  void connect(String id) async {
-    await _meshRepository.connect(_findProxyNodeById(id));
+  void connect(Device proxyNode) async {
+    await _meshRepository.connect(proxyNode);
+    final nodes = await _meshRepository.allNodes();
+    emit(state.copyWith(
+      isLoading: false,
+      meshNodes: nodes,
+    ));
   }
 
-  void disconnect(String id) async {
+  void disconnect() async {
     await _meshRepository.disconnect();
   }
 
-  void changeColor(String id) async {
-    final nodes = await _meshRepository.allNodes();
-    final node = nodes.last;
-    final elements = await node.elements;
+  void changeColor(MeshNode node) async {
+    final elements = await node.node.elements;
     final element = elements.last;
     final model = element.models.last;
     final modelId = model.modelId;
@@ -67,9 +77,6 @@ class SearchViewModel extends ViewModel<SearchState> {
     );
     print(result);
   }
-
-  DiscoveredDevice _findProxyNodeById(String id) =>
-      state.proxyNodes.where((proxyNode) => proxyNode.id == id).first;
 
   @override
   Future<void> close() {

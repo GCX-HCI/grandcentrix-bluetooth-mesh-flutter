@@ -3,7 +3,28 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
+
+part '../.generated/data/mesh_repository.freezed.dart';
+
+@freezed
+class MeshNode with _$MeshNode {
+  const factory MeshNode({
+    required String name,
+    required String uuid,
+    required ProvisionedMeshNode node,
+  }) = _MeshNode;
+}
+
+@freezed
+class Device with _$Device {
+  const factory Device({
+    required String name,
+    required String uuid,
+    required DiscoveredDevice device,
+  }) = _Device;
+}
 
 class MeshRepository {
   final NordicNrfMesh _nordicNrfMesh;
@@ -23,27 +44,31 @@ class MeshRepository {
     return _nordicNrfMesh.meshManagerApi.importMeshNetworkJson(fileContent);
   }
 
-  Stream<DiscoveredDevice> findProxyNodes() {
-    return _nordicNrfMesh.scanForProxy();
+  Stream<Device> findProxyNodes() {
+    return _nordicNrfMesh.scanForProxy().map(
+          (proxyNode) => Device(
+            name: proxyNode.name,
+            uuid: proxyNode.id,
+            device: proxyNode,
+          ),
+        );
   }
 
-  Future<List<ProvisionedMeshNode>> allNodes() async {
-    return await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes ??
+  Future<List<MeshNode>> allNodes() async {
+    final nodes = await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes ??
         <ProvisionedMeshNode>[];
+    return Stream.fromIterable(nodes)
+        .asyncMap((node) async =>
+            MeshNode(name: (await node.name), uuid: node.uuid, node: node))
+        .toList();
   }
 
-  Future<void> connect(DiscoveredDevice node) async {
-    final device =
-        await _nordicNrfMesh.searchForSpecificNode(node.id, isProxy: true);
-    if (device != null) {
-      _bleMeshManager.callbacks = _Callbacks(
-        _nordicNrfMesh.meshManagerApi,
-        _bleMeshManager,
-      );
-      await _bleMeshManager.connect(device);
-    } else {
-      // TODO
-    }
+  Future<void> connect(Device device) async {
+    _bleMeshManager.callbacks = _Callbacks(
+      _nordicNrfMesh.meshManagerApi,
+      _bleMeshManager,
+    );
+    await _bleMeshManager.connect(device.device);
   }
 
   Future<void> disconnect() async {
