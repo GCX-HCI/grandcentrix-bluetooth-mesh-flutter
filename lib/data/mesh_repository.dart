@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +33,10 @@ class MeshRepository {
     final device =
         await _nordicNrfMesh.searchForSpecificNode(node.id, isProxy: true);
     if (device != null) {
-      _bleMeshManager.callbacks = _Callbacks(_bleMeshManager);
+      _bleMeshManager.callbacks = _Callbacks(
+        _nordicNrfMesh.meshManagerApi,
+        _bleMeshManager,
+      );
       await _bleMeshManager.connect(device);
     } else {
       // TODO
@@ -67,13 +70,29 @@ class MeshRepository {
 }
 
 class _Callbacks extends BleMeshManagerCallbacks {
+  final MeshManagerApi _meshManagerApi;
   final BleMeshManager _bleMeshManager;
+  late StreamSubscription<List<int>> _onMeshPduCreatedSubscription;
 
-  _Callbacks(BleMeshManager bleMeshManager) : _bleMeshManager = bleMeshManager;
+  _Callbacks(MeshManagerApi meshManagerApi, BleMeshManager bleMeshManager)
+      : _meshManagerApi = meshManagerApi,
+        _bleMeshManager = bleMeshManager {
+    _onMeshPduCreatedSubscription =
+        meshManagerApi.onMeshPduCreated.listen((event) async {
+      print('onMeshPduCreated $event');
+      await bleMeshManager.sendPdu(event);
+    });
+  }
 
   @override
   Future<void> sendMtuToMeshManagerApi(int mtu) async {
-    _bleMeshManager.mtuSize = mtu;
+    _meshManagerApi.setMtu(mtu);
+  }
+
+  @override
+  Future<void> dispose() {
+    _onMeshPduCreatedSubscription.cancel();
+    return super.dispose();
   }
 }
 
