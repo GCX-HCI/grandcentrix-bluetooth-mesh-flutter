@@ -29,7 +29,7 @@ class SearchPage extends StatelessWidget {
                     child: const Text('Find Proxy Nodes'),
                   ),
                   const SizedBox(height: 24),
-                  state.isLoading
+                  state.isLoadingProxyNodes
                       ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
                           shrinkWrap: true,
@@ -59,27 +59,31 @@ class SearchPage extends StatelessWidget {
                           itemCount: state.proxyNodes.length,
                         ),
                   const SizedBox(height: 24),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      final node = state.meshNodes.elementAt(index);
-                      return Card(
-                        child: Column(
-                          children: [
-                            Text(
-                              '${node.name} \n (${node.uuid})',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            TextButton(
-                              onPressed: () => viewModel.changeColor(node),
-                              child: const Text('Change Color'),
-                            ),
-                          ],
+                  state.isLoadingMeshNodes
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            final node = state.meshNodes.elementAt(index);
+                            return Card(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${node.name} \n (${node.uuid})',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        viewModel.changeColor(node),
+                                    child: const Text('Change Color'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                          itemCount: state.meshNodes.length,
                         ),
-                      );
-                    },
-                    itemCount: state.meshNodes.length,
-                  ),
                 ],
               ),
             ),

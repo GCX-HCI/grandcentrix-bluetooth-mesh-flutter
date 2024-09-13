@@ -13,7 +13,8 @@ const String _viegaParameters = '0C22001201'; // Defined CAN bus message
 @freezed
 class SearchState with _$SearchState {
   const factory SearchState({
-    @Default(false) bool isLoading,
+    @Default(false) bool isLoadingProxyNodes,
+    @Default(false) bool isLoadingMeshNodes,
     @Default(false) bool hasError,
     @Default(<Device>[]) List<Device> proxyNodes,
     @Default(<MeshNode>[]) List<MeshNode> meshNodes,
@@ -22,7 +23,7 @@ class SearchState with _$SearchState {
 
 class SearchViewModel extends ViewModel<SearchState> {
   final MeshRepository _meshRepository;
-  StreamSubscription<Device>? _subscription;
+  StreamSubscription<Device>? _deviceSubscription;
 
   SearchViewModel({required MeshRepository meshRepository})
       : _meshRepository = meshRepository,
@@ -34,33 +35,55 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   void findProxyNodes() async {
-    emit(state.copyWith(isLoading: true));
-    _subscription = _meshRepository
+    emit(
+      state.copyWith(
+        isLoadingProxyNodes: true,
+        proxyNodes: [],
+        meshNodes: [],
+      ),
+    );
+    _deviceSubscription = _meshRepository
         .findProxyNodes()
         .where((proxyNode) =>
             state.proxyNodes.every((element) => element.uuid != proxyNode.uuid))
         .listen((proxyNode) {
-      emit(state.copyWith(
-        isLoading: false,
-        proxyNodes: [
-          ...state.proxyNodes,
-          ...{proxyNode}
-        ],
-      ));
+      emit(
+        state.copyWith(
+          isLoadingProxyNodes: false,
+          proxyNodes: [
+            ...state.proxyNodes,
+            ...{proxyNode}
+          ],
+        ),
+      );
     });
   }
 
   void connect(Device proxyNode) async {
+    _deviceSubscription?.cancel();
+    emit(
+      state.copyWith(
+        isLoadingMeshNodes: true,
+        meshNodes: [],
+      ),
+    );
     await _meshRepository.connect(proxyNode);
     final nodes = await _meshRepository.allNodes();
-    emit(state.copyWith(
-      isLoading: false,
-      meshNodes: nodes,
-    ));
+    emit(
+      state.copyWith(
+        isLoadingMeshNodes: false,
+        meshNodes: nodes,
+      ),
+    );
   }
 
   void disconnect() async {
     await _meshRepository.disconnect();
+    emit(
+      state.copyWith(
+        meshNodes: [],
+      ),
+    );
   }
 
   void changeColor(MeshNode node) async {
@@ -79,7 +102,7 @@ class SearchViewModel extends ViewModel<SearchState> {
 
   @override
   Future<void> close() {
-    _subscription?.cancel();
+    _deviceSubscription?.cancel();
     return super.close();
   }
 }

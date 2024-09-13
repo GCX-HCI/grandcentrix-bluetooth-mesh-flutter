@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchState {
-  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingProxyNodes => throw _privateConstructorUsedError;
+  bool get isLoadingMeshNodes => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
   List<Device> get proxyNodes => throw _privateConstructorUsedError;
   List<MeshNode> get meshNodes => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $SearchStateCopyWith<$Res> {
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
   $Res call(
-      {bool isLoading,
+      {bool isLoadingProxyNodes,
+      bool isLoadingMeshNodes,
       bool hasError,
       List<Device> proxyNodes,
       List<MeshNode> meshNodes});
@@ -56,15 +58,20 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? isLoadingProxyNodes = null,
+    Object? isLoadingMeshNodes = null,
     Object? hasError = null,
     Object? proxyNodes = null,
     Object? meshNodes = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      isLoadingProxyNodes: null == isLoadingProxyNodes
+          ? _value.isLoadingProxyNodes
+          : isLoadingProxyNodes // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingMeshNodes: null == isLoadingMeshNodes
+          ? _value.isLoadingMeshNodes
+          : isLoadingMeshNodes // ignore: cast_nullable_to_non_nullable
               as bool,
       hasError: null == hasError
           ? _value.hasError
@@ -91,7 +98,8 @@ abstract class _$$SearchStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading,
+      {bool isLoadingProxyNodes,
+      bool isLoadingMeshNodes,
       bool hasError,
       List<Device> proxyNodes,
       List<MeshNode> meshNodes});
@@ -110,15 +118,20 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
+    Object? isLoadingProxyNodes = null,
+    Object? isLoadingMeshNodes = null,
     Object? hasError = null,
     Object? proxyNodes = null,
     Object? meshNodes = null,
   }) {
     return _then(_$SearchStateImpl(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      isLoadingProxyNodes: null == isLoadingProxyNodes
+          ? _value.isLoadingProxyNodes
+          : isLoadingProxyNodes // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingMeshNodes: null == isLoadingMeshNodes
+          ? _value.isLoadingMeshNodes
+          : isLoadingMeshNodes // ignore: cast_nullable_to_non_nullable
               as bool,
       hasError: null == hasError
           ? _value.hasError
@@ -140,7 +153,8 @@ class __$$SearchStateImplCopyWithImpl<$Res>
 
 class _$SearchStateImpl implements _SearchState {
   const _$SearchStateImpl(
-      {this.isLoading = false,
+      {this.isLoadingProxyNodes = false,
+      this.isLoadingMeshNodes = false,
       this.hasError = false,
       final List<Device> proxyNodes = const <Device>[],
       final List<MeshNode> meshNodes = const <MeshNode>[]})
@@ -149,7 +163,10 @@ class _$SearchStateImpl implements _SearchState {
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final bool isLoadingProxyNodes;
+  @override
+  @JsonKey()
+  final bool isLoadingMeshNodes;
   @override
   @JsonKey()
   final bool hasError;
@@ -173,7 +190,7 @@ class _$SearchStateImpl implements _SearchState {
 
   @override
   String toString() {
-    return 'SearchState(isLoading: $isLoading, hasError: $hasError, proxyNodes: $proxyNodes, meshNodes: $meshNodes)';
+    return 'SearchState(isLoadingProxyNodes: $isLoadingProxyNodes, isLoadingMeshNodes: $isLoadingMeshNodes, hasError: $hasError, proxyNodes: $proxyNodes, meshNodes: $meshNodes)';
   }
 
   @override
@@ -181,8 +198,10 @@ class _$SearchStateImpl implements _SearchState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchStateImpl &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
+            (identical(other.isLoadingProxyNodes, isLoadingProxyNodes) ||
+                other.isLoadingProxyNodes == isLoadingProxyNodes) &&
+            (identical(other.isLoadingMeshNodes, isLoadingMeshNodes) ||
+                other.isLoadingMeshNodes == isLoadingMeshNodes) &&
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             const DeepCollectionEquality()
@@ -194,7 +213,8 @@ class _$SearchStateImpl implements _SearchState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      isLoading,
+      isLoadingProxyNodes,
+      isLoadingMeshNodes,
       hasError,
       const DeepCollectionEquality().hash(_proxyNodes),
       const DeepCollectionEquality().hash(_meshNodes));
@@ -210,13 +230,16 @@ class _$SearchStateImpl implements _SearchState {
 
 abstract class _SearchState implements SearchState {
   const factory _SearchState(
-      {final bool isLoading,
+      {final bool isLoadingProxyNodes,
+      final bool isLoadingMeshNodes,
       final bool hasError,
       final List<Device> proxyNodes,
       final List<MeshNode> meshNodes}) = _$SearchStateImpl;
 
   @override
-  bool get isLoading;
+  bool get isLoadingProxyNodes;
+  @override
+  bool get isLoadingMeshNodes;
   @override
   bool get hasError;
   @override
