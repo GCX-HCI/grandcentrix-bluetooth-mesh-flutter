@@ -103,12 +103,11 @@ class _Callbacks extends BleMeshManagerCallbacks {
 
   @override
   Future<void> dispose() => Future.wait([
-    _onDataReceivedSubscription.cancel(),
-    _onDataSentSubscription.cancel(),
-    _onMeshPduCreatedSubscription.cancel(),
-    super.dispose(),
-  ]);
-  }
+        _onDataReceivedSubscription.cancel(),
+        _onDataSentSubscription.cancel(),
+        _onMeshPduCreatedSubscription.cancel(),
+        super.dispose(),
+      ]);
 }
 
 final meshRepositoryProvider =
