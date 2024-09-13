@@ -72,9 +72,7 @@ class SearchViewModel extends ViewModel<SearchState> {
       modelId: vendorModel.modelId,
       opCode: _viegaOpCode,
       parameters: _viegaParameters,
-      keyIndex: vendorModel.boundAppKey.isNotEmpty
-          ? vendorModel.boundAppKey.first
-          : 0,
+      keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
     );
     print(result);
   }
