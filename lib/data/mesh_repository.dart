@@ -73,6 +73,10 @@ class _Callbacks extends BleMeshManagerCallbacks {
   final MeshManagerApi _meshManagerApi;
   final BleMeshManager _bleMeshManager;
   late StreamSubscription<List<int>> _onMeshPduCreatedSubscription;
+  late StreamSubscription<BleMeshManagerCallbacksDataReceived>
+      _onDataReceivedSubscription;
+  late StreamSubscription<BleMeshManagerCallbacksDataSent>
+      _onDataSentSubscription;
 
   _Callbacks(MeshManagerApi meshManagerApi, BleMeshManager bleMeshManager)
       : _meshManagerApi = meshManagerApi,
@@ -82,6 +86,14 @@ class _Callbacks extends BleMeshManagerCallbacks {
       print('onMeshPduCreated $event');
       await bleMeshManager.sendPdu(event);
     });
+    _onDataReceivedSubscription = onDataReceived.listen((event) async {
+      print('onDataReceived ${event.device.id} ${event.pdu} ${event.mtu}');
+      await meshManagerApi.handleNotifications(event.mtu, event.pdu);
+    });
+    _onDataSentSubscription = onDataSent.listen((event) async {
+      print('onDataSent ${event.device.id} ${event.pdu} ${event.mtu}');
+      await meshManagerApi.handleWriteCallbacks(event.mtu, event.pdu);
+    });
   }
 
   @override
@@ -90,9 +102,12 @@ class _Callbacks extends BleMeshManagerCallbacks {
   }
 
   @override
-  Future<void> dispose() {
-    _onMeshPduCreatedSubscription.cancel();
-    return super.dispose();
+  Future<void> dispose() => Future.wait([
+    _onDataReceivedSubscription.cancel(),
+    _onDataSentSubscription.cancel(),
+    _onMeshPduCreatedSubscription.cancel(),
+    super.dispose(),
+  ]);
   }
 }
 
