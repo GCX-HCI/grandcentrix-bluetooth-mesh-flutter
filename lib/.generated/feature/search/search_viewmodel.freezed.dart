@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SearchState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
-  Set<Node> get nodes => throw _privateConstructorUsedError;
+  Set<DiscoveredDevice> get proxyNodes => throw _privateConstructorUsedError;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +33,7 @@ abstract class $SearchStateCopyWith<$Res> {
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res, SearchState>;
   @useResult
-  $Res call({bool isLoading, bool hasError, Set<Node> nodes});
+  $Res call({bool isLoading, bool hasError, Set<DiscoveredDevice> proxyNodes});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
   $Res call({
     Object? isLoading = null,
     Object? hasError = null,
-    Object? nodes = null,
+    Object? proxyNodes = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -64,10 +64,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
-      nodes: null == nodes
-          ? _value.nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as Set<Node>,
+      proxyNodes: null == proxyNodes
+          ? _value.proxyNodes
+          : proxyNodes // ignore: cast_nullable_to_non_nullable
+              as Set<DiscoveredDevice>,
     ) as $Val);
   }
 }
@@ -80,7 +80,7 @@ abstract class _$$SearchStateImplCopyWith<$Res>
       __$$SearchStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool hasError, Set<Node> nodes});
+  $Res call({bool isLoading, bool hasError, Set<DiscoveredDevice> proxyNodes});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$SearchStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? hasError = null,
-    Object? nodes = null,
+    Object? proxyNodes = null,
   }) {
     return _then(_$SearchStateImpl(
       isLoading: null == isLoading
@@ -109,10 +109,10 @@ class __$$SearchStateImplCopyWithImpl<$Res>
           ? _value.hasError
           : hasError // ignore: cast_nullable_to_non_nullable
               as bool,
-      nodes: null == nodes
-          ? _value._nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as Set<Node>,
+      proxyNodes: null == proxyNodes
+          ? _value._proxyNodes
+          : proxyNodes // ignore: cast_nullable_to_non_nullable
+              as Set<DiscoveredDevice>,
     ));
   }
 }
@@ -123,8 +123,8 @@ class _$SearchStateImpl implements _SearchState {
   const _$SearchStateImpl(
       {this.isLoading = false,
       this.hasError = false,
-      final Set<Node> nodes = const <Node>{}})
-      : _nodes = nodes;
+      final Set<DiscoveredDevice> proxyNodes = const <DiscoveredDevice>{}})
+      : _proxyNodes = proxyNodes;
 
   @override
   @JsonKey()
@@ -132,18 +132,18 @@ class _$SearchStateImpl implements _SearchState {
   @override
   @JsonKey()
   final bool hasError;
-  final Set<Node> _nodes;
+  final Set<DiscoveredDevice> _proxyNodes;
   @override
   @JsonKey()
-  Set<Node> get nodes {
-    if (_nodes is EqualUnmodifiableSetView) return _nodes;
+  Set<DiscoveredDevice> get proxyNodes {
+    if (_proxyNodes is EqualUnmodifiableSetView) return _proxyNodes;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_nodes);
+    return EqualUnmodifiableSetView(_proxyNodes);
   }
 
   @override
   String toString() {
-    return 'SearchState(isLoading: $isLoading, hasError: $hasError, nodes: $nodes)';
+    return 'SearchState(isLoading: $isLoading, hasError: $hasError, proxyNodes: $proxyNodes)';
   }
 
   @override
@@ -155,12 +155,13 @@ class _$SearchStateImpl implements _SearchState {
                 other.isLoading == isLoading) &&
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
-            const DeepCollectionEquality().equals(other._nodes, _nodes));
+            const DeepCollectionEquality()
+                .equals(other._proxyNodes, _proxyNodes));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, hasError,
-      const DeepCollectionEquality().hash(_nodes));
+      const DeepCollectionEquality().hash(_proxyNodes));
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -175,14 +176,14 @@ abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {final bool isLoading,
       final bool hasError,
-      final Set<Node> nodes}) = _$SearchStateImpl;
+      final Set<DiscoveredDevice> proxyNodes}) = _$SearchStateImpl;
 
   @override
   bool get isLoading;
   @override
   bool get hasError;
   @override
-  Set<Node> get nodes;
+  Set<DiscoveredDevice> get proxyNodes;
 
   /// Create a copy of SearchState
   /// with the given fields replaced by the non-null parameter values.

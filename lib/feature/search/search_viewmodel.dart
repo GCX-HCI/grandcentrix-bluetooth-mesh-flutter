@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
-import 'package:mesh/models/node.dart';
 
 part '../../.generated/feature/search/search_viewmodel.freezed.dart';
 
@@ -12,13 +12,13 @@ class SearchState with _$SearchState {
   const factory SearchState({
     @Default(false) bool isLoading,
     @Default(false) bool hasError,
-    @Default(<Node>{}) Set<Node> nodes,
+    @Default(<DiscoveredDevice>{}) Set<DiscoveredDevice> proxyNodes,
   }) = _SearchState;
 }
 
 class SearchViewModel extends ViewModel<SearchState> {
   final MeshRepository _meshRepository;
-  StreamSubscription<Node>? _subscription;
+  StreamSubscription<DiscoveredDevice>? _subscription;
 
   SearchViewModel({required MeshRepository meshRepository})
       : _meshRepository = meshRepository,
@@ -31,38 +31,45 @@ class SearchViewModel extends ViewModel<SearchState> {
 
   void findProxyNodes() async {
     emit(state.copyWith(isLoading: true));
-    _subscription = _meshRepository.findProxyNodes().listen((node) {
-      emit(state.copyWith(isLoading: false, nodes: {
-        ...state.nodes,
-        ...{node}
+    _subscription = _meshRepository.findProxyNodes().listen((proxyNode) {
+      emit(state.copyWith(isLoading: false, proxyNodes: {
+        ...state.proxyNodes,
+        ...{proxyNode}
       }));
     });
   }
 
   void connect(String id) async {
-    await _meshRepository.connect(_findNodeById(id));
+    await _meshRepository.connect(_findProxyNodeById(id));
   }
 
   void disconnect(String id) async {
-    await _meshRepository.disconnect(_findNodeById(id));
+    await _meshRepository.disconnect();
   }
 
   void changeColor(String id) async {
-    const address = 0;
-    const int modelId = 0;
+    final nodes = await _meshRepository.allNodes();
+    final node = nodes.last;
+    final elements = await node.elements;
+    final element = elements.last;
+    final model = element.models.last;
+    final modelId = model.modelId;
+    final address = element.address;
     const String opCode = '04';
     const String parameters = '0C22001201';
+
     final result = await _meshRepository.sendVendorModelMessage(
       address: address,
       modelId: modelId,
       opCode: opCode,
       parameters: parameters,
+      keyIndex: model.boundAppKey.first,
     );
     print(result);
   }
 
-  Node _findNodeById(String id) =>
-      state.nodes.where((node) => node.id == id).first;
+  DiscoveredDevice _findProxyNodeById(String id) =>
+      state.proxyNodes.where((proxyNode) => proxyNode.id == id).first;
 
   @override
   Future<void> close() {

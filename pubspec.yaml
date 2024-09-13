@@ -12,6 +12,7 @@ dependencies:
 
   flutter_bloc: ^8.1.6
   freezed_annotation: ^2.4.4
+  flutter_reactive_ble: ^5.0.2
   nordic_nrf_mesh:
     path: ./nrf_mesh_plugin
 

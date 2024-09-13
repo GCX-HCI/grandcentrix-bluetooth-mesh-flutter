@@ -26,7 +26,7 @@ class SearchPage extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: viewModel.findProxyNodes,
-                    child: const Text('Find Nodes'),
+                    child: const Text('Find Proxy Nodes'),
                   ),
                   const SizedBox(height: 24),
                   state.isLoading
@@ -34,7 +34,7 @@ class SearchPage extends StatelessWidget {
                       : ListView.builder(
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            final node = state.nodes.elementAt(index);
+                            final node = state.proxyNodes.elementAt(index);
                             return Card(
                               child: Column(
                                 children: [
@@ -61,7 +61,7 @@ class SearchPage extends StatelessWidget {
                               ),
                             );
                           },
-                          itemCount: state.nodes.length,
+                          itemCount: state.proxyNodes.length,
                         ),
                 ],
               ),

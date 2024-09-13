@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mesh/models/node.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 
 class MeshRepository {
@@ -23,13 +23,16 @@ class MeshRepository {
     return _nordicNrfMesh.meshManagerApi.importMeshNetworkJson(fileContent);
   }
 
-  Stream<Node> findProxyNodes() {
-    return _nordicNrfMesh
-        .scanForProxy()
-        .map((device) => Node(name: device.name, id: device.id));
+  Stream<DiscoveredDevice> findProxyNodes() {
+    return _nordicNrfMesh.scanForProxy();
   }
 
-  Future<void> connect(Node node) async {
+  Future<List<ProvisionedMeshNode>> allNodes() async {
+    return await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes ??
+        <ProvisionedMeshNode>[];
+  }
+
+  Future<void> connect(DiscoveredDevice node) async {
     final device =
         await _nordicNrfMesh.searchForSpecificNode(node.id, isProxy: true);
     if (device != null) {
@@ -43,28 +46,23 @@ class MeshRepository {
     }
   }
 
-  Future<void> disconnect(Node node) async {
+  Future<void> disconnect() async {
     await _bleMeshManager.disconnect();
   }
 
-  Future<Map<String, dynamic>> sendVendorModelMessage(
-      {required int address,
-      required int modelId,
-      required String opCode,
-      required String parameters}) async {
-    final nodes = await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes;
-    final node = nodes?.last;
-    final elements = await node?.elements;
-    final element = elements!.last;
-    final model = element.models.last;
-    modelId = model.modelId;
-    address = element.address;
-    return await _nordicNrfMesh.meshManagerApi.sendVendorModelMessage(
+  Future<Map<String, dynamic>> sendVendorModelMessage({
+    required int address,
+    required int modelId,
+    required String opCode,
+    required String parameters,
+    int keyIndex = 0,
+  }) {
+    return _nordicNrfMesh.meshManagerApi.sendVendorModelMessage(
       address,
       modelId,
       opCode,
       parameters,
-      keyIndex: model.boundAppKey.first,
+      keyIndex: keyIndex,
     );
   }
 }
