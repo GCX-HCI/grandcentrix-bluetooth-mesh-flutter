@@ -71,7 +71,6 @@ class MeshRepository {
 
 class _Callbacks extends BleMeshManagerCallbacks {
   final MeshManagerApi _meshManagerApi;
-  final BleMeshManager _bleMeshManager;
   late StreamSubscription<List<int>> _onMeshPduCreatedSubscription;
   late StreamSubscription<BleMeshManagerCallbacksDataReceived>
       _onDataReceivedSubscription;
@@ -79,8 +78,7 @@ class _Callbacks extends BleMeshManagerCallbacks {
       _onDataSentSubscription;
 
   _Callbacks(MeshManagerApi meshManagerApi, BleMeshManager bleMeshManager)
-      : _meshManagerApi = meshManagerApi,
-        _bleMeshManager = bleMeshManager {
+      : _meshManagerApi = meshManagerApi {
     _onMeshPduCreatedSubscription =
         meshManagerApi.onMeshPduCreated.listen((event) async {
       print('onMeshPduCreated $event');
