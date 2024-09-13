@@ -3,12 +3,12 @@
   "id": "https://www.bluetooth.com/specifications/specs/mesh-cdb-1-0-1-schema.json#",
   "version": "1.0.1",
   "meshUUID": "2B7E546F-C76D-405B-A3AE-44DA90FE496B",
-  "meshName": "Viega Test Mesh Network",
-  "timestamp": "2024-09-05T15:36:03+02:00",
+  "meshName": "nRF Mesh Network",
+  "timestamp": "2024-09-13T12:40:34+02:00",
   "partial": false,
   "netKeys": [
     {
-      "name": "My Viega Network Key",
+      "name": "Network Key 1",
       "index": 0,
       "key": "45F47064FA7A5D9948E8CD782FD1EDDF",
       "phase": 0,
@@ -18,7 +18,7 @@
   ],
   "appKeys": [
     {
-      "name": "My Viega Application Key",
+      "name": "Application Key 1",
       "index": 0,
       "boundNetKey": 0,
       "key": "714F134C3EA5D4C761A40A423D3DCD29"
@@ -52,8 +52,8 @@
     {
       "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
       "name": "nRF Mesh Provisioner",
-      "deviceKey": "B5B8C5DDB9FE103FAE6DF450AAF161A4",
-      "unicastAddress": "0001",
+      "deviceKey": "78686DAF696777497B46F105A4DBFF5D",
+      "unicastAddress": "1234",
       "security": "insecure",
       "configComplete": false,
       "features": {
@@ -69,10 +69,15 @@
           "updated": false
         }
       ],
-      "appKeys": [],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
       "elements": [
         {
-          "name": "Element: 0x0001",
+          "name": "Element: 0x1234",
           "index": 0,
           "location": "0000",
           "models": [
