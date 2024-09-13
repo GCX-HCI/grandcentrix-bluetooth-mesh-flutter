@@ -7,8 +7,8 @@ import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 
 part '../../.generated/feature/search/search_viewmodel.freezed.dart';
 
-const String vendorModelOpCode = '04'; // Defined CAN bus message
-const String vendorModelParameters = '0C22001201'; // Defined CAN bus message
+const String _viegaOpCode = '04'; // Defined CAN bus message
+const String _viegaParameters = '0C22001201'; // Defined CAN bus message
 
 @freezed
 class SearchState with _$SearchState {
@@ -64,16 +64,14 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   void changeColor(MeshNode node) async {
-    final elements = await node.node.elements;
-    final element = elements.first;
-    final vendorModel =
-        element.models.firstWhere((model) => model.isVendorModel);
+    final element = await node.node.firstElementWithVendorModel;
+    final vendorModel = element.firstVendorModel;
 
     final result = await _meshRepository.sendVendorModelMessage(
       address: element.address,
       modelId: vendorModel.modelId,
-      opCode: vendorModelOpCode,
-      parameters: vendorModelParameters,
+      opCode: _viegaOpCode,
+      parameters: _viegaParameters,
       keyIndex: vendorModel.boundAppKey.isNotEmpty
           ? vendorModel.boundAppKey.first
           : 0,
@@ -88,6 +86,23 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 }
 
-extension VendorModelCheck on ModelData {
+extension _VendorModelSearch on ProvisionedMeshNode {
+  Future<ElementData> get firstElementWithVendorModel async {
+    final elements = await this.elements;
+    return elements.firstWhere(
+      (element) => element.models.any((model) => model.isVendorModel),
+      orElse: () => elements.first,
+    );
+  }
+}
+
+extension _VendorModelGetter on ElementData {
+  ModelData get firstVendorModel => models.firstWhere(
+        (model) => model.isVendorModel,
+        orElse: () => models.first,
+      );
+}
+
+extension _VendorModelCheck on ModelData {
   bool get isVendorModel => (modelId & 0xFFFF0000) != 0;
 }
