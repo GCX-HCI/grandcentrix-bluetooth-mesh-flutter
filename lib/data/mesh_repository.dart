@@ -55,9 +55,15 @@ class MeshRepository {
   }
 
   Future<List<MeshNode>> allNodes() async {
+    final provisioners =
+        await _nordicNrfMesh.meshManagerApi.meshNetwork?.provisioners;
     final nodes = await _nordicNrfMesh.meshManagerApi.meshNetwork?.nodes ??
         <ProvisionedMeshNode>[];
     return Stream.fromIterable(nodes)
+        .skipWhile((node) =>
+            provisioners?.any(
+                (provisioner) => provisioner.provisionerUuid == node.uuid) ==
+            true)
         .asyncMap((node) async =>
             MeshNode(name: (await node.name), uuid: node.uuid, node: node))
         .toList();
