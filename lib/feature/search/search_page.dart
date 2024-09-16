@@ -54,6 +54,7 @@ class SearchPage extends StatelessWidget {
                       ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             final proxyNode = state.proxyNodes.elementAt(index);
                             return Card(
@@ -90,6 +91,7 @@ class SearchPage extends StatelessWidget {
                       ? const Center(child: CircularProgressIndicator())
                       : ListView.builder(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             final node = state.meshNodes.elementAt(index);
                             return Card(
