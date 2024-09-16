@@ -21,7 +21,20 @@ class SearchPage extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Viega Mesh Network Demo'),
+              backgroundColor: Colors.black,
+              leading: const Padding(
+                padding: EdgeInsets.only(left: 16.0),
+                child: Image(
+                  image: AssetImage('assets/images/viega.png'),
+                ),
+              ),
+              title: Text(
+                'Viega Mesh Demo',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: Colors.white),
+              ),
             ),
             body: SingleChildScrollView(
               child: Column(
