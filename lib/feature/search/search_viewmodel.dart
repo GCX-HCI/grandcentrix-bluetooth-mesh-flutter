@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
+import 'package:mesh/util/permission_checker.dart';
 import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 
 part '../../.generated/feature/search/search_viewmodel.freezed.dart';
@@ -30,10 +31,14 @@ class SearchState with _$SearchState {
 
 class SearchViewModel extends ViewModel<SearchState> {
   final MeshRepository _meshRepository;
+  final PermissionChecker _permissionChecker;
   StreamSubscription<Device>? _deviceSubscription;
 
-  SearchViewModel({required MeshRepository meshRepository})
-      : _meshRepository = meshRepository,
+  SearchViewModel({
+    required MeshRepository meshRepository,
+    required PermissionChecker permissionChecker,
+  })  : _meshRepository = meshRepository,
+        _permissionChecker = permissionChecker,
         super(const SearchState());
 
   @override
@@ -42,6 +47,11 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   void findProxyNodes() async {
+    await _permissionChecker.checkBluetoothPermission();
+    await _permissionChecker.checkLocationPermission();
+    await _permissionChecker.checkBluetoothScanPermission();
+    await _permissionChecker.checkBluetoothConnectPermission();
+
     emit(
       state.copyWith(
         isLoadingProxyNodes: true,

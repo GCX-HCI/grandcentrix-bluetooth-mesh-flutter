@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
 import 'package:mesh/feature/search/search_viewmodel.dart';
+import 'package:mesh/util/permission_checker.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -12,6 +13,7 @@ class SearchPage extends StatelessWidget {
     return ViewModelProvider<SearchViewModel>(
       create: (context) => SearchViewModel(
         meshRepository: context.read<MeshRepository>(),
+        permissionChecker: context.read<PermissionChecker>(),
       ),
       child: BlocBuilder<SearchViewModel, SearchState>(
         builder: (context, state) {
