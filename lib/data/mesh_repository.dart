@@ -78,7 +78,6 @@ class MeshRepository {
       _bleMeshManager,
     );
     await _bleMeshManager.connect(device.device).timeout(timeout);
-    ;
   }
 
   Future<void> disconnect({
