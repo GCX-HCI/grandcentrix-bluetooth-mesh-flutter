@@ -69,16 +69,22 @@ class MeshRepository {
         .toList();
   }
 
-  Future<void> connect(Device device) async {
+  Future<void> connect(
+    Device device, {
+    Duration timeout = const Duration(seconds: 10),
+  }) async {
     _bleMeshManager.callbacks = _Callbacks(
       _nordicNrfMesh.meshManagerApi,
       _bleMeshManager,
     );
-    await _bleMeshManager.connect(device.device);
+    await _bleMeshManager.connect(device.device).timeout(timeout);
+    ;
   }
 
-  Future<void> disconnect() async {
-    await _bleMeshManager.disconnect();
+  Future<void> disconnect({
+    Duration timeout = const Duration(seconds: 10),
+  }) async {
+    await _bleMeshManager.disconnect().timeout(timeout);
   }
 
   Future<Map<String, dynamic>> sendVendorModelMessage({
@@ -87,14 +93,17 @@ class MeshRepository {
     required String opCode,
     required String parameters,
     int keyIndex = 0,
+    Duration timeout = const Duration(seconds: 10),
   }) {
-    return _nordicNrfMesh.meshManagerApi.sendVendorModelMessage(
-      address,
-      modelId,
-      opCode,
-      parameters,
-      keyIndex: keyIndex,
-    );
+    return _nordicNrfMesh.meshManagerApi
+        .sendVendorModelMessage(
+          address,
+          modelId,
+          opCode,
+          parameters,
+          keyIndex: keyIndex,
+        )
+        .timeout(timeout);
   }
 }
 
