@@ -61,7 +61,12 @@ class SearchPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                    '${proxyNode.name} (${proxyNode.uuid})',
+                                    proxyNode.name,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  Text(
+                                    '(${proxyNode.uuid})',
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
@@ -92,7 +97,12 @@ class SearchPage extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                    '${node.name} \n (${node.uuid})',
+                                    node.name,
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
+                                  ),
+                                  Text(
+                                    '(${node.uuid})',
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
