@@ -71,14 +71,20 @@ class SearchPage extends StatelessWidget {
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        viewModel.connect(proxyNode),
-                                    child: const Text('Connect'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () => viewModel.disconnect(),
-                                    child: const Text('Disconnect'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            viewModel.connect(proxyNode),
+                                        child: const Text('Connect'),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      TextButton(
+                                        onPressed: () => viewModel.disconnect(),
+                                        child: const Text('Disconnect'),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -108,15 +114,21 @@ class SearchPage extends StatelessWidget {
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
                                   ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        viewModel.changeColor(node),
-                                    child: const Text('Change Color'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        viewModel.triggerMotor(node),
-                                    child: const Text('Trigger Motor'),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            viewModel.changeColor(node),
+                                        child: const Text('Change Color'),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      TextButton(
+                                        onPressed: () =>
+                                            viewModel.triggerMotor(node),
+                                        child: const Text('Trigger Motor'),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
