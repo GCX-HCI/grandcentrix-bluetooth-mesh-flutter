@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mesh/architecture/mvvm.dart';
 import 'package:mesh/data/mesh_repository.dart';
@@ -43,7 +46,22 @@ class SearchViewModel extends ViewModel<SearchState> {
 
   @override
   Future<void> init() async {
-    await _meshRepository.loadMeshNetwork();
+    await _importMeshConfigurationFromAssets();
+  }
+
+  Future<void> _importMeshConfigurationFromAssets() async {
+    final networkJson =
+        await rootBundle.loadString('assets/files/network.json');
+    await _meshRepository.loadMeshNetwork(networkJson);
+  }
+
+  Future<void> importMeshConfiguration() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+    );
+    File file = File(result!.files.single.path!);
+    await _meshRepository.loadMeshNetworkFromFile(file);
   }
 
   void findProxyNodes() async {

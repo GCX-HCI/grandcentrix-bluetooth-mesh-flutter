@@ -27,6 +27,10 @@ class SearchPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextButton(
+                    onPressed: viewModel.importMeshConfiguration,
+                    child: const Text('Import Mesh Configuration'),
+                  ),
+                  TextButton(
                     onPressed: viewModel.findProxyNodes,
                     child: const Text('Find Proxy Nodes'),
                   ),

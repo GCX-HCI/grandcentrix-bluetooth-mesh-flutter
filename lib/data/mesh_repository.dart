@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,19 +29,20 @@ class Device with _$Device {
 class MeshRepository {
   final NordicNrfMesh _nordicNrfMesh;
   final BleMeshManager _bleMeshManager;
-  final String _networkJsonAssetPath;
 
   MeshRepository({
     NordicNrfMesh? nordicNrfMesh,
     BleMeshManager? bleMeshManager,
-    required String networkJsonAssetPath,
   })  : _nordicNrfMesh = nordicNrfMesh ?? NordicNrfMesh(),
-        _bleMeshManager = bleMeshManager ?? BleMeshManager(),
-        _networkJsonAssetPath = networkJsonAssetPath;
+        _bleMeshManager = bleMeshManager ?? BleMeshManager();
 
-  Future<IMeshNetwork> loadMeshNetwork() async {
-    final fileContent = await rootBundle.loadString(_networkJsonAssetPath);
-    return _nordicNrfMesh.meshManagerApi.importMeshNetworkJson(fileContent);
+  Future<IMeshNetwork> loadMeshNetworkFromFile(File file) async {
+    final networkJson = await file.readAsString();
+    return loadMeshNetwork(networkJson);
+  }
+
+  Future<IMeshNetwork> loadMeshNetwork(String networkJson) async {
+    return _nordicNrfMesh.meshManagerApi.importMeshNetworkJson(networkJson);
   }
 
   Stream<Device> findProxyNodes() {
@@ -147,7 +148,5 @@ class _Callbacks extends BleMeshManagerCallbacks {
 
 final meshRepositoryProvider =
     RepositoryProvider<MeshRepository>(create: (context) {
-  return MeshRepository(
-    networkJsonAssetPath: 'assets/files/network.json',
-  );
+  return MeshRepository();
 });
