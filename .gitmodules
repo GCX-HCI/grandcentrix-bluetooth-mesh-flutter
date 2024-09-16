@@ -1,0 +1,9 @@
+[submodule ".flutter"]
+	path = .flutter
+	url = https://github.com/flutter/flutter.git
+	branch = stable
+
+[submodule "nrf_mesh_plugin"]
+	path = nrf_mesh_plugin
+	url = https://github.com/OZEO-DOOZ/nrf_mesh_plugin
+	branch = feature/vendor_model_message

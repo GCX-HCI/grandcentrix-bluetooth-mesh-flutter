@@ -1,0 +1,84 @@
+# This workflow builds the release variants for Android and iOS, uploads them to a new release
+# and distributes them via firebase
+# It is triggered by the creation of a sprint release tag
+# Please note that the KeyStore credentials have to be created as secrets in your project
+# For more information about best practices, see:
+# https://grandcentrix.atlassian.net/wiki/spaces/TENG/pages/31180230199/GitHub+Actions+Best+Practices
+
+name: Build Sprint Release
+
+on:
+  push:
+    tags:
+      - 'release/sprint*'
+
+jobs:
+  build_sprint_release_android:
+    name: Build Sprint Release Android
+    runs-on: ubuntu-latest
+    outputs:
+      version-name: ${{ steps.version.outputs.version-name }}
+    timeout-minutes: 60
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Enable private dependencies
+        run: git config --global url."https://${{ github.actor }}:${{ secrets.REPO_READ_TOKEN }}@github.com/".insteadOf "git@github.com:"
+      - name: Cache dart packages
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            /opt/hostedtoolcache/flutter
+            ~/.pub-cache
+          key: ${{ runner.os }}-flutter-android
+      - name: Accept Android licenses
+        run: yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
+      - name: Run Flutter doctor
+        run: ./flutterw doctor --verbose
+        timeout-minutes: 10
+      - name: Get Dart packages
+        run: ./flutterw pub get
+        timeout-minutes: 10
+      - name: Get version name for release name
+        id: version
+        run: |
+          pubspecVersion=$(cat pubspec.yaml | grep 'version\:\ ' | sed -e "s/^.*[[:blank:]]//" -e "s/^\"//" -e "s/\"$//")
+          sprintNumber=${GITHUB_REF#refs/*/release/*}
+          echo "::set-output name=version-name::$pubspecVersion-$sprintNumber"
+      - name: Build Release
+        run: ./flutterw build apk --release --build-number=${{ github.run_number }} --build-name=${{ steps.version.outputs.version-name }} --target=lib/main.dart
+        timeout-minutes: 20
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: "build/app/outputs/flutter-apk/app-release.apk"
+
+  release_n_upload:
+    name: Release and upload to Firebase
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs:
+      - build_sprint_release_android
+    steps:
+      - name: Download workflow artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+      - name: Create GitHub release
+        id: github_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: Sprint Release ${{needs.build_sprint_release_android.outputs.version-name}}
+          files: "**/artifacts/**"
+          prerelease: true
+      - name: Upload Android app to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        with:
+          appId: ${{secrets.FIREBASE_ANDROID_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          file: artifacts/apk/app-release.apk
+          groups: gcx
+          releaseNotes: Sprint Release ${{needs.build_sprint_release_android.outputs.version-name}}
