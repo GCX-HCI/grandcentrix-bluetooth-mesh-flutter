@@ -6,3 +6,4 @@
 [submodule "nrf_mesh_plugin"]
 	path = ./nrf_mesh_plugin
 	url = ./nrf_mesh_plugin
+	branch = feature/vendor_model_message
