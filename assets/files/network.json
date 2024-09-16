@@ -4,7 +4,7 @@
   "version": "1.0.1",
   "meshUUID": "2B7E546F-C76D-405B-A3AE-44DA90FE496B",
   "meshName": "nRF Mesh Network",
-  "timestamp": "2024-09-13T12:40:34+02:00",
+  "timestamp": "2024-09-16T11:57:47+02:00",
   "partial": false,
   "netKeys": [
     {
@@ -52,8 +52,8 @@
     {
       "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
       "name": "nRF Mesh Provisioner",
-      "deviceKey": "78686DAF696777497B46F105A4DBFF5D",
-      "unicastAddress": "1234",
+      "deviceKey": "FA98ED204FD7A42D263EB08BC83B6CFD",
+      "unicastAddress": "1235",
       "security": "insecure",
       "configComplete": false,
       "features": {
@@ -77,7 +77,7 @@
       ],
       "elements": [
         {
-          "name": "Element: 0x1234",
+          "name": "Element: 0x1235",
           "index": 0,
           "location": "0000",
           "models": [
