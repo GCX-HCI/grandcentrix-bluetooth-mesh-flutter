@@ -49,7 +49,7 @@
             android:usesPermissionFlags="neverForLocation" />
 
     <application
-        android:label="Bluetooth Mesh Demo"
+        android:label="Viega Mesh Demo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
