@@ -21,6 +21,8 @@ const String _viegaTriggerMotorOpCode = '04';
 // Defined CAN bus message parameters to trigger the motor
 const String _viegaTriggerMotorParameters = '0125001301';
 
+const String _networkJsonAssetsPath = 'assets/files/network.json';
+
 @freezed
 class SearchState with _$SearchState {
   const factory SearchState({
@@ -50,8 +52,7 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   Future<void> _importMeshConfigurationFromAssets() async {
-    final networkJson =
-        await rootBundle.loadString('assets/files/network.json');
+    final networkJson = await rootBundle.loadString(_networkJsonAssetsPath);
     await _meshRepository.loadMeshNetwork(networkJson);
   }
 
