@@ -76,8 +76,11 @@ class MeshRepository {
             provisioners?.any(
                 (provisioner) => provisioner.provisionerUuid == node.uuid) ==
             true)
-        .asyncMap((node) async =>
-            MeshNode(name: (await node.name), uuid: node.uuid, node: node))
+        .asyncMap((node) async => MeshNode(
+              name: (await node.name),
+              uuid: node.uuid,
+              node: node,
+            ))
         .toList();
   }
 

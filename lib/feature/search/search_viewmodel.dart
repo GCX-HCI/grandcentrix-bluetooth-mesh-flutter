@@ -114,7 +114,11 @@ class SearchViewModel extends ViewModel<SearchState> {
   }
 
   void disconnect() async {
-    await _meshRepository.disconnect();
+    try {
+      await _meshRepository.disconnect();
+    } catch (e) {
+      // do nothing
+    }
     emit(
       state.copyWith(
         meshNodes: [],
@@ -126,28 +130,36 @@ class SearchViewModel extends ViewModel<SearchState> {
     final element = await node.node.firstElementWithVendorModel;
     final vendorModel = element.firstVendorModel;
 
-    final result = await _meshRepository.sendVendorModelMessage(
-      address: element.address,
-      modelId: vendorModel.modelId,
-      opCode: _viegaChangeColorOpCode,
-      parameters: _viegaChangeColorParameters,
-      keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
-    );
-    print(result);
+    try {
+      final result = await _meshRepository.sendVendorModelMessage(
+        address: element.address,
+        modelId: vendorModel.modelId,
+        opCode: _viegaChangeColorOpCode,
+        parameters: _viegaChangeColorParameters,
+        keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
+      );
+      print(result);
+    } catch (e) {
+      // do nothing
+    }
   }
 
   void cleaningFunction(MeshNode node) async {
     final element = await node.node.firstElementWithVendorModel;
     final vendorModel = element.firstVendorModel;
 
-    final result = await _meshRepository.sendVendorModelMessage(
-      address: element.address,
-      modelId: vendorModel.modelId,
-      opCode: _viegaTriggerMotorOpCode,
-      parameters: _viegaTriggerMotorParameters,
-      keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
-    );
-    print(result);
+    try {
+      final result = await _meshRepository.sendVendorModelMessage(
+        address: element.address,
+        modelId: vendorModel.modelId,
+        opCode: _viegaTriggerMotorOpCode,
+        parameters: _viegaTriggerMotorParameters,
+        keyIndex: vendorModel.boundAppKey.firstOrNull ?? 0,
+      );
+      print(result);
+    } catch (e) {
+      // do nothing
+    }
   }
 
   @override
