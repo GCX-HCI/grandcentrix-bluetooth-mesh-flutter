@@ -2,18 +2,18 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "id": "https://www.bluetooth.com/specifications/specs/mesh-cdb-1-0-1-schema.json#",
   "version": "1.0.1",
-  "meshUUID": "2B7E546F-C76D-405B-A3AE-44DA90FE496B",
+  "meshUUID": "3ACFF20A-DE45-49EE-9AB8-FC8AB40FBAA0",
   "meshName": "nRF Mesh Network",
-  "timestamp": "2024-09-16T11:57:47+02:00",
-  "partial": false,
+  "timestamp": "2024-09-17T14:57:11+02:00",
+  "partial": true,
   "netKeys": [
     {
       "name": "Network Key 1",
       "index": 0,
-      "key": "45F47064FA7A5D9948E8CD782FD1EDDF",
+      "key": "4D9796FD8C805F614C9062415016F3B2",
       "phase": 0,
-      "minSecurity": "secure",
-      "timestamp": "2024-09-05T15:34:41+02:00"
+      "minSecurity": "insecure",
+      "timestamp": "2024-09-17T14:44:25+02:00"
     }
   ],
   "appKeys": [
@@ -21,39 +21,39 @@
       "name": "Application Key 1",
       "index": 0,
       "boundNetKey": 0,
-      "key": "714F134C3EA5D4C761A40A423D3DCD29"
+      "key": "3AE6AD24574D8BC2FC5FB16DB425A3E7"
     }
   ],
   "provisioners": [
     {
-      "provisionerName": "nRF Mesh Provisioner",
-      "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
+      "provisionerName": "7Morgen",
+      "UUID": "B26CADF6-DF7B-4E0F-9E08-7A53B6CE6D9A",
       "allocatedUnicastRange": [
         {
-          "lowAddress": "0001",
-          "highAddress": "199A"
+          "lowAddress": "3334",
+          "highAddress": "4CCC"
         }
       ],
       "allocatedGroupRange": [
         {
-          "lowAddress": "C000",
-          "highAddress": "CC9A"
+          "lowAddress": "D934",
+          "highAddress": "E5CC"
         }
       ],
       "allocatedSceneRange": [
         {
-          "firstScene": "0001",
-          "lastScene": "3333"
+          "firstScene": "6667",
+          "lastScene": "9999"
         }
       ]
     }
   ],
   "nodes": [
     {
-      "UUID": "F5A01E38-DC6E-40A8-989C-50C05BA9E2FE",
+      "UUID": "7FA01C3E-1E8C-40BE-B13D-8EC170AB0CEE",
       "name": "nRF Mesh Provisioner",
-      "deviceKey": "FA98ED204FD7A42D263EB08BC83B6CFD",
-      "unicastAddress": "1235",
+      "deviceKey": "C6765D952B2E81C1D719BB5EF8E78415",
+      "unicastAddress": "0001",
       "security": "insecure",
       "configComplete": false,
       "features": {
@@ -69,15 +69,10 @@
           "updated": false
         }
       ],
-      "appKeys": [
-        {
-          "index": 0,
-          "updated": false
-        }
-      ],
+      "appKeys": [],
       "elements": [
         {
-          "name": "Element: 0x1235",
+          "name": "Element: 0x0001",
           "index": 0,
           "location": "0000",
           "models": [
@@ -92,9 +87,9 @@
       "excluded": false
     },
     {
-      "UUID": "2BEC02FD-A9B2-4BB9-9413-FD02564DC446",
+      "UUID": "A0D88D48-BBF5-4A66-9F27-72B7440A1599",
       "name": "Canoble",
-      "deviceKey": "2E0F457AC60BE19730DD8B969DD80DEA",
+      "deviceKey": "299F7DF4A4F637CEA7D0B65516ADD907",
       "unicastAddress": "0002",
       "security": "insecure",
       "configComplete": false,
@@ -103,10 +98,10 @@
       "vid": "0000",
       "crpl": "000A",
       "features": {
-        "friend": 0,
-        "lowPower": 2,
+        "friend": 2,
+        "lowPower": 0,
         "proxy": 0,
-        "relay": 0
+        "relay": 2
       },
       "defaultTTL": 7,
       "networkTransmit": {
@@ -142,10 +137,2119 @@
               "subscribe": []
             },
             {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
               "modelId": "04480001",
               "bind": [
                 0
               ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "1BFCB9FB-FBBD-4289-A403-46040442BD76",
+      "name": "Canoble Relay 1",
+      "deviceKey": "67295F2EC9FC13BB1F623C9A0DD8289B",
+      "unicastAddress": "0003",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0003",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "4A1DA9DA-26EA-4F27-B5E2-5625D915F0D8",
+      "name": "Canoble Bench",
+      "deviceKey": "64C013BFDBD10269638B2999385B6525",
+      "unicastAddress": "0004",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0004",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0001",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1401",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480002",
+              "bind": [
+                0
+              ],
+              "subscribe": [],
+              "publish": {
+                "address": "000E",
+                "index": 0,
+                "ttl": 255,
+                "period": {
+                  "numberOfSteps": 0,
+                  "resolution": 100
+                },
+                "retransmit": {
+                  "count": 7,
+                  "interval": 100
+                },
+                "credentials": 0
+              }
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "F84E1969-E9AA-4D49-87B1-E696165542B6",
+      "name": "Canoble Relay 2",
+      "deviceKey": "DDD4B9C48CCD758FFFCAF1190CDAB79F",
+      "unicastAddress": "0005",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0005",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "DA37A605-F445-43F4-A5C8-59FA0BBA4C0B",
+      "name": "Canoble Relay 3",
+      "deviceKey": "BF9C15A9202BAD5305E8E02BA25AEC09",
+      "unicastAddress": "0006",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0006",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "1EDF5F79-27AD-4489-A120-A086D852DB76",
+      "name": "Canoble Relay 4",
+      "deviceKey": "EC954D14FFFB86F320F7F8E57C157E81",
+      "unicastAddress": "0007",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0007",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "06591671-A22F-45CC-B9A6-E98E5DD04A33",
+      "name": "Canoble Relay 5",
+      "deviceKey": "261CDECFEB6D195F2E893E51480D5424",
+      "unicastAddress": "0008",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0008",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "7C47E50D-45B5-45C0-83B8-1AF2BA4ACA3F",
+      "name": "Canoble Relay 6",
+      "deviceKey": "7281A3D9D71463DA4AA2D17DF8748FF0",
+      "unicastAddress": "0009",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0009",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "E6377A01-52D7-4EAA-99C8-85FEAD286155",
+      "name": "Canoble Relay 7",
+      "deviceKey": "067F3C11A5CEA5CC7351BC7D3F927163",
+      "unicastAddress": "000A",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000A",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "3D2DE713-B744-4B58-82D2-18EC48BB94A7",
+      "name": "Canoble Relay 8",
+      "deviceKey": "77AEDE00C29161A73F3F80BC7802B1BB",
+      "unicastAddress": "000B",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000B",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "10C05EE5-3BC8-48BC-AF3F-A11AC4378743",
+      "name": "Canoble Relay 9",
+      "deviceKey": "3A3B9FA418C67F1B8470CF4EF6CCB0C9",
+      "unicastAddress": "000C",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000C",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "352C030E-07BB-48F9-8AD3-FCF1F844D706",
+      "name": "Canoble Relay 10",
+      "deviceKey": "CB013E72BE0F04E2CAD563AE195F7601",
+      "unicastAddress": "000D",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000D",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "B7F309C1-6466-4BCB-880C-F63E9B99B434",
+      "name": "Canoble LPN Mock 1",
+      "deviceKey": "CFB1B36B0DD53CD3F98E1BE3D2741991",
+      "unicastAddress": "000E",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000E",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "A1F945B4-817E-420D-9E06-BA4B7E815DF2",
+      "name": "Canoble LPN Mock 2",
+      "deviceKey": "4F49E79BDD9697E2CF46BBDD81A35616",
+      "unicastAddress": "000F",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x000F",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "9E5DE7CF-FABA-4DCD-A1A2-18300545B232",
+      "name": "Canoble LPN Mock 3",
+      "deviceKey": "AB451916F82812BE41EF58414B54E55E",
+      "unicastAddress": "0010",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0010",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "BDAA3462-F7B3-4474-8255-CB9D084C9B8B",
+      "name": "Canoble LPN Mock 4",
+      "deviceKey": "A8D06288C0E0AA2487D04760B8775FC6",
+      "unicastAddress": "0011",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0011",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "16E116D9-0B4E-4252-A91E-E926F4B1DDAD",
+      "name": "Canoble LPN Mock 5",
+      "deviceKey": "DED815BD4EDC0E3DF593C54D2D8FB475",
+      "unicastAddress": "0012",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0012",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "2C3A2ED1-209B-413A-93C5-D12EDF64CEC5",
+      "name": "Canoble LPN Mock 6",
+      "deviceKey": "0198FD83BF1924852D97344584DD9BFC",
+      "unicastAddress": "0013",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0013",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "504BAED4-4406-446F-AFB4-512BBBF96B90",
+      "name": "Canoble LPN Mock 7",
+      "deviceKey": "E047DD8FFEA45A9573E73C46E8DF01C5",
+      "unicastAddress": "0014",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0014",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "ECE4A589-D3C7-47BE-931B-5A762C38B841",
+      "name": "Canoble LPN Mock 8",
+      "deviceKey": "3B02556FD0002B740F1695174118095C",
+      "unicastAddress": "0015",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0015",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "0C2C450E-2FBA-4C43-B3D3-BAF1D04533BC",
+      "name": "Canoble LPN Mock 9",
+      "deviceKey": "ACAD7576E601B7835D4A02755ABCF252",
+      "unicastAddress": "0016",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0016",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "4666A90F-A1BB-4339-B999-56F05E44ACC6",
+      "name": "Canoble LPN Mock 10",
+      "deviceKey": "A64EF04785F3B57F4E30974B2E25CFEE",
+      "unicastAddress": "0017",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0017",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "3CBD7874-56D4-4360-8342-878BA92BEC9F",
+      "name": "Canoble LPN Mock 11",
+      "deviceKey": "29DDD870C9A30D70DA04AE2D0C86250B",
+      "unicastAddress": "0018",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0018",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "8CD636A5-C3AA-47E1-B329-C95A3C55781E",
+      "name": "Canoble LPN Mock 12",
+      "deviceKey": "D9B740016B91CFCD514F386B58EEECFB",
+      "unicastAddress": "0019",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0019",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "9D8F5AF7-02E4-4832-A270-A508FD1BA7CD",
+      "name": "Canoble LPN Mock 13",
+      "deviceKey": "EC14917BFEDC1599E31AADF159FFB2BF",
+      "unicastAddress": "001A",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001A",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "2C365F27-8960-489B-93C9-A0D8769F9764",
+      "name": "Canoble LPN Mock 14",
+      "deviceKey": "AC156EDA49EC3544748223AEAF8CB645",
+      "unicastAddress": "001B",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001B",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "C0082CCF-3AEA-4304-BFF7-D330C5151CFB",
+      "name": "Canoble LPN Mock 15",
+      "deviceKey": "FA041C9B3418C25B6BEB48FC8C8B5110",
+      "unicastAddress": "001C",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001C",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "4D411571-538F-4BBD-B2BE-EA8EAC708442",
+      "name": "Canoble LPN Mock 16",
+      "deviceKey": "0B66E9F99E76233ADF740CF791848BDC",
+      "unicastAddress": "001D",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 2,
+        "lowPower": 0,
+        "proxy": 0,
+        "relay": 2
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001D",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "EEF11E37-DE6F-4D1B-910E-E1C8219002E4",
+      "name": "Zirk_1",
+      "deviceKey": "C20FEE96AF65C89B2CE0697AA7606603",
+      "unicastAddress": "001E",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001E",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "8370C9FE-99B3-49D9-BC8F-3601664C9626",
+      "name": "Zirk_2",
+      "deviceKey": "D84C5C379DF7A368BA0D68008E192C84",
+      "unicastAddress": "001F",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x001F",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "BA58B577-67AF-4905-85A7-4A889850D6FA",
+      "name": "Zirk_3",
+      "deviceKey": "96133564E010EB0B7F643F542D8BE649",
+      "unicastAddress": "0020",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x0020",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "C5D0C02B-32AE-484D-8CD3-D5A2EE37C295",
+      "name": "Pixel 7a",
+      "deviceKey": "0A27F9D8BCE1B97D8EA82F2AB756DE80",
+      "unicastAddress": "3000",
+      "security": "insecure",
+      "configComplete": false,
+      "features": {
+        "friend": 2,
+        "lowPower": 2,
+        "proxy": 2,
+        "relay": 2
+      },
+      "defaultTTL": 5,
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x3000",
+          "index": 0,
+          "location": "0000",
+          "models": [
+            {
+              "modelId": "0001",
+              "bind": [],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "2BEC02FD-A9B2-4BB9-9413-FD02564DC446",
+      "name": "Zirk_4",
+      "deviceKey": "E7DA32DF60BCB834BCBE3A80F291C924",
+      "unicastAddress": "199B",
+      "security": "insecure",
+      "configComplete": false,
+      "cid": "0448",
+      "pid": "0000",
+      "vid": "0000",
+      "crpl": "000A",
+      "features": {
+        "friend": 0,
+        "lowPower": 2,
+        "proxy": 0,
+        "relay": 0
+      },
+      "defaultTTL": 7,
+      "networkTransmit": {
+        "count": 3,
+        "interval": 20
+      },
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x199B",
+          "index": 0,
+          "location": "0001",
+          "models": [
+            {
+              "modelId": "0000",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "0002",
+              "bind": [],
+              "subscribe": []
+            },
+            {
+              "modelId": "1400",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            },
+            {
+              "modelId": "04480001",
+              "bind": [
+                0
+              ],
+              "subscribe": []
+            }
+          ]
+        }
+      ],
+      "excluded": false
+    },
+    {
+      "UUID": "B26CADF6-DF7B-4E0F-9E08-7A53B6CE6D9A",
+      "name": "7Morgen",
+      "deviceKey": "C0BD36ED7E06D1A6528F722745315878",
+      "unicastAddress": "3350",
+      "security": "insecure",
+      "configComplete": false,
+      "features": {
+        "friend": 2,
+        "lowPower": 2,
+        "proxy": 2,
+        "relay": 2
+      },
+      "defaultTTL": 5,
+      "netKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "appKeys": [
+        {
+          "index": 0,
+          "updated": false
+        }
+      ],
+      "elements": [
+        {
+          "name": "Element: 0x3350",
+          "index": 0,
+          "location": "0000",
+          "models": [
+            {
+              "modelId": "0001",
+              "bind": [],
               "subscribe": []
             }
           ]
