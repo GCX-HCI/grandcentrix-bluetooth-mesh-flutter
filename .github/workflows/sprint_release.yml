@@ -24,6 +24,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
       - name: Enable private dependencies
         run: git config --global url."https://${{ github.actor }}:${{ secrets.REPO_READ_TOKEN }}@github.com/".insteadOf "git@github.com:"
       - name: Cache dart packages
