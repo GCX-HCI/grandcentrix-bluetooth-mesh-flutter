@@ -4,6 +4,6 @@
 	branch = stable
 
 [submodule "nrf_mesh_plugin"]
-	path = ./nrf_mesh_plugin
-	url = ./nrf_mesh_plugin
+	path = nrf_mesh_plugin
+	url = https://github.com/GCX-HCI/grandcentrix_nrf_mesh_plugin_flutter
 	branch = feature/vendor_model_message
