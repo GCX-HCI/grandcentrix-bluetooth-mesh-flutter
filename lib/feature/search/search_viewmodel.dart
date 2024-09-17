@@ -122,7 +122,7 @@ class SearchViewModel extends ViewModel<SearchState> {
     );
   }
 
-  void changeColor(MeshNode node) async {
+  void discover(MeshNode node) async {
     final element = await node.node.firstElementWithVendorModel;
     final vendorModel = element.firstVendorModel;
 
@@ -136,7 +136,7 @@ class SearchViewModel extends ViewModel<SearchState> {
     print(result);
   }
 
-  void triggerMotor(MeshNode node) async {
+  void cleaningFunction(MeshNode node) async {
     final element = await node.node.firstElementWithVendorModel;
     final vendorModel = element.firstVendorModel;
 
