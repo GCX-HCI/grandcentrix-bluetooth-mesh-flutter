@@ -46,9 +46,20 @@ class MeshRepository {
   }
 
   Stream<Device> findProxyNodes() {
-    return _nordicNrfMesh.scanForProxy().map(
+    return _nordicNrfMesh
+        .scanForProxy()
+        .asyncMap((proxy) async {
+          bool matches = await _nordicNrfMesh.meshManagerApi
+              .networkIdMatches(proxy.serviceData[meshProxyUuid]!);
+          if (matches) {
+            return proxy;
+          }
+          return null;
+        })
+        .where((proxy) => proxy != null)
+        .map(
           (proxyNode) => Device(
-            name: proxyNode.name,
+            name: proxyNode!.name,
             uuid: proxyNode.id,
             device: proxyNode,
           ),
